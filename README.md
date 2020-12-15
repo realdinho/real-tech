@@ -1,6 +1,6 @@
-# 02-pages-views
+# RealTech
 
-> My primo Nuxt.js project
+> a tech blog implemented using NuxtJS
 
 ## Build Setup
 
