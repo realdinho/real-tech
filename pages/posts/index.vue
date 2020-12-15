@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="posts-page")
-    post-list
+    post-list(:posts="loadedPosts")
 </template>
 
 <script>
@@ -9,6 +9,11 @@ import PostList from '@/components/posts/PostList'
 export default {
   components: {
     PostList
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>
