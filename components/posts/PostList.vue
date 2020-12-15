@@ -2,6 +2,7 @@
   section(class="post-list")
     post-preview(
       id="1"
+      :is-admin="isAdmin"
       title="Enterprise Smart Assistant"
       previewText="This article describes the smart solutions in an enterprise context"
       thumbnail="https://cache.techmahindra.com/static/img/hi-tech-enterprise-smart-assistant.jpg"
@@ -26,6 +27,12 @@ import PostPreview from '@/components/posts/PostPreview'
 export default {
   components: {
     PostPreview
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      required: false
+    }
   }
 }
 </script>
