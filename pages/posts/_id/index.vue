@@ -1,11 +1,11 @@
 <template lang="pug">
   div(class="single-post-page")
     section(class="post")
-      h1(class="post-title") Title of the post
+      h1(class="post-title") {{ loadedPost.title }}
       div(class="post-details")
-        div(class="post-detail") Last updated on XXX
-        div(class="post-detail") Written by NAME
-      p(class="post-content") content of the post
+        div(class="post-detail") Last updated on {{ loadedPost.updatedDate }}
+        div(class="post-detail") Written by {{ loadedPost.author }}
+      p(class="post-content") {{ loadedPost.content }}
     section(class="post-feedback")
       p let me know what you think about the post, send a mail to 
         a(href="mailto:feedback@realdiv.com") feedback@realdiv.com
@@ -13,9 +13,24 @@
 
 <script>
 export default {
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPost: {
+          id: '3',
+          title: 'Machine Learning (ID: ' + context.params.id + ')',
+          author: 'Realdo Dias',
+          content: 'summy dummy test that will be updated later on cause right now I have no idea of what I',
+          previewText: 'Come and discover how enterprises are using machine learning to improve their daily tasks',
+          thumbnail: 'https://s27389.pcdn.co/wp-content/uploads/2019/10/retail-innovation-changing-tech-consumer-employee-demands-1024x440.jpeg',
+          updatedDate: new Date()
+        }
+      })
+    }, 1000)
+  },
   head() {
     return {
-      title: 'Post XXX'
+      title: this.loadedPost.title
     }
   }
 }

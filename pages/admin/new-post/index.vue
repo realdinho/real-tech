@@ -11,6 +11,9 @@ export default {
   layout: 'admin',
   components: {
     AdminPostForm
+  },
+  head: {
+    title: 'New Post'
   }
 }
 </script>

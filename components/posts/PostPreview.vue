@@ -39,11 +39,6 @@ export default {
     postLink() {
       return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
     }
-  },  
-  head() {
-    return {
-      title: this.title
-    }
   }
 }
 </script>

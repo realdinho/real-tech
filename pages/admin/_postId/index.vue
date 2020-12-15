@@ -21,6 +21,11 @@ export default {
         content: 'this is one the best techs in 2020'
       }
     }
+  },
+  head() {
+    return {
+      title: this.loadedPost.title
+    }
   }
 }
 </script>

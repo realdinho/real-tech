@@ -27,6 +27,11 @@ export default {
     return {
       isLogin: true
     }
+  },
+  head() {
+    return {
+      title: this.isLogin ? 'Login' : 'Signup'
+    }
   }
 }
 </script>

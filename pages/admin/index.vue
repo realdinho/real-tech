@@ -16,6 +16,11 @@ export default {
   components: {
     PostList,
     AppButton
+  },
+  head() {
+    return {
+      title: 'Dashboard'
+    }
   }
 }
 </script>
