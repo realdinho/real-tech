@@ -4,6 +4,7 @@
     AppControlInput(v-model="editedPost.title") Title
     AppControlInput(v-model="editedPost.thumbnailLink") Thumbnail Link
     AppControlInput(control-type="textarea" v-model="editedPost.content") Content
+    AppControlInput(control-type="textarea" v-model="editedPost.previewText") Preview Text
     AppButton(type="submit") Save
     AppButton(type="button" style="margin-left: 10px" btn-style="cancel" @click="onCancel") Cancel
 </template>
@@ -31,13 +32,15 @@ export default {
         author: '',
         title: '',
         thumbnailLink: '',
-        content: ''
+        content: '',
+        previewText: ''
       }
     }
   },
   methods: {
     onSave() {
-      console.log(this.editedPost)
+      // console.log(this.editedPost)
+      this.$emit('save-post', this.editedPost)
     },
     onCancel() {
       this.$router.push('/admin')
