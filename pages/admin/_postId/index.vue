@@ -14,25 +14,20 @@ export default {
     AdminPostForm
   },
   asyncData(context) {
-    return axios.get(`https://real-tech-d036d-default-rtdb.firebaseio.com/posts/${context.params.postId}.json`)
+    return axios
+      .get(`https://real-tech-d036d-default-rtdb.firebaseio.com/posts/${context.params.postId}.json`)
       .then(res => {
         return {
-          loadedPost: res.data
+          loadedPost: { ...res.data, id: context.params.postId }
         }
       })
       .catch(e => context.error(e))
   },
   methods: {
     onEditPost(editedPost) {
-      axios.put(
-        `https://real-tech-d036d-default-rtdb.firebaseio.com/posts/${this.$route.params.postId}.json`,
-        editedPost
-      )
-      .then(res => {
-        console.log(res)
+      this.$store.dispatch('editPost', editedPost).then(() => {
         this.$router.push('/admin')
       })
-      .catch(e => console.log(e))
     }
   },
   head() {

@@ -15,18 +15,7 @@ export default {
   },
   methods: {
     onSubmitted(postData) {
-      axios.post(
-        'https://real-tech-d036d-default-rtdb.firebaseio.com/posts.json', 
-        { 
-          ...postData, 
-          updatedDate: new Date() 
-        }
-      )
-      .then(result => {
-        console.log(result)
-        this.$router.push('/admin')
-      })
-      .catch(e => console.log(e))
+      this.$store.dispatch('addPost', postData).then(() => this.$router.push('/admin'))
     }
   },
   head: {
