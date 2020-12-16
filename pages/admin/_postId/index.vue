@@ -1,10 +1,11 @@
 <template lang="pug">
   div.admin-post-page
     section.update-form
-      admin-post-form(:post="loadedPost")
+      admin-post-form(:post="loadedPost" @save-post="onEditPost")
 </template>
 
 <script>
+import axios from 'axios'
 import AdminPostForm from '@/components/forms/AdminPostForm'
 
 export default {
@@ -12,14 +13,26 @@ export default {
   components: {
     AdminPostForm
   },
-  data() {
-    return {
-      loadedPost: {
-        author: 'Realdo Dias',
-        title: 'The Greatest Techs in 2020',
-        thumbnailLink: 'https://sm.mashable.com/mashable_in/seo/1/13445/13445_5s8f.jpg',
-        content: 'this is one the best techs in 2020'
-      }
+  asyncData(context) {
+    return axios.get(`https://real-tech-d036d-default-rtdb.firebaseio.com/posts/${context.params.postId}.json`)
+      .then(res => {
+        return {
+          loadedPost: res.data
+        }
+      })
+      .catch(e => context.error(e))
+  },
+  methods: {
+    onEditPost(editedPost) {
+      axios.put(
+        `https://real-tech-d036d-default-rtdb.firebaseio.com/posts/${this.$route.params.postId}.json`,
+        editedPost
+      )
+      .then(res => {
+        console.log(res)
+        this.$router.push('/admin')
+      })
+      .catch(e => console.log(e))
     }
   },
   head() {
