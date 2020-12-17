@@ -20,7 +20,11 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#0eff45', height: '4px', duration: 5000 },
+  loadingIndicator: {
+    name: 'circle',
+    color: '#0eff45'
+  },
   /*
   ** Global CSS
   */
@@ -50,5 +54,8 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://real-tech-d036d-default-rtdb.firebaseio.com'
   }
 }

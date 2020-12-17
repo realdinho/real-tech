@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   nuxtServerInit(vuexContext, context) {
     return axios
-      .get('https://real-tech-d036d-default-rtdb.firebaseio.com/posts.json')
+      .get(`${process.env.baseUrl}/posts.json`)
       .then(res => {
         const postArray = []
         for (const key in res.data) {
@@ -22,7 +22,7 @@ export default {
       updatedDate: new Date() 
     }
     return axios
-      .post('https://real-tech-d036d-default-rtdb.firebaseio.com/posts.json', createdPost)
+      .post(`${process.env.baseUrl}/posts.json`, createdPost)
       .then(res => {
         vuexContext.commit('addPost', { ...createdPost, id: res.data.name })
       })
@@ -30,7 +30,7 @@ export default {
   },
   editPost(vuexContext, editedPost) {
     return axios
-      .put(`https://real-tech-d036d-default-rtdb.firebaseio.com/posts/${editedPost.id}.json`, editedPost)
+      .put(`${process.env.baseUrl}/posts/${editedPost.id}.json`, editedPost)
       .then(res => {
         vuexContext.commit('editPost', editedPost)
       })
