@@ -63,6 +63,7 @@ export default {
     }
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'https://real-tech-d036d-default-rtdb.firebaseio.com'
+    baseUrl: process.env.BASE_URL || 'https://real-tech-d036d-default-rtdb.firebaseio.com',
+    fbApiKey: 'AIzaSyChFE1gzUgbIE74gInPd_QnqQjRHbK4A5o'
   }
 }

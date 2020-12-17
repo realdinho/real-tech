@@ -1,9 +1,9 @@
 <template lang="pug">
   div(class="admin-auth-page")
     div(class="auth-container")
-      form
-        AppControlInput(type="email") E-Mail Address
-        AppControlInput(type="password") Password
+      form(@submit.prevent="onSubmit")
+        AppControlInput(type="email" v-model="email") E-Mail Address
+        AppControlInput(type="password" v-model="password") Password
         AppButton(type="submit") {{ isLogin ? 'Login' : 'Sign Up' }}
         AppButton(
           type="button"
@@ -25,7 +25,27 @@ export default {
   },
   data() {
     return {
-      isLogin: true
+      isLogin: true,
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    onSubmit() {
+      let authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
+      if(!this.isLogin) authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
+
+      this.$axios
+        .$post(
+          authUrl + process.env.fbApiKey, 
+          {
+            email: this.email,
+            password: this.password,
+            returnSecureToken: true
+          }
+        )
+        .then(res => console.log(res))
+        .catch(e => console.log(e))
     }
   },
   head() {
