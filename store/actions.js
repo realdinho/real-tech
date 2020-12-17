@@ -57,15 +57,9 @@ export default {
         localStorage.setItem('tokenExpiration', new Date().getTime() + Number.parseInt(res.expiresIn) * 1000)
         Cookie.set('jwt', res.idToken)
         Cookie.set('expirationDate', new Date().getTime() + Number.parseInt(res.expiresIn) * 1000)
-        // vuexContext.dispatch('setLogoutTimer', res.expiresIn * 1000)
       })
       .catch(e => console.log(e))
   },
-  // setLogoutTimer(vuexContext, duration) {
-  //   setTimeout(() => {
-  //     vuexContext.commit('clearToken')
-  //   }, duration)
-  // },
   initAuth(vuexContext, req) {
     let token;
     let expirationDate;
@@ -93,11 +87,19 @@ export default {
 
     if (new Date().getTime() > +expirationDate || !token) { 
       console.log('no token or invalid token')
-      vuexContext.commit('clearToken')
+      vuexContext.dispatch('logout')
       return 
     }
-    
-    // vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
+
     vuexContext.commit('setToken', token)
+  },
+  logout(vuexContext) {
+    vuexContext.commit('clearToken')
+    Cookie.remove('jwt')
+    Cookie.remove('expirationDate')
+    if(process.client) {
+      localStorage.removeItem('token')
+      localStorage.removeItem('tokenExpiration')
+    }
   }
 }
