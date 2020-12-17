@@ -28,7 +28,7 @@ export default {
   },
   editPost(vuexContext, editedPost) {
     return this.$axios
-      .$put(`${process.env.baseUrl}/posts/${editedPost.id}.json`, editedPost)
+      .$put(`${process.env.baseUrl}/posts/${editedPost.id}.json?auth=${vuexContext.state.token}`, editedPost)
       .then(res => {
         vuexContext.commit('editPost', editedPost)
       })
@@ -50,7 +50,13 @@ export default {
       .then(res => {
         console.log(res)
         vuexContext.commit('setToken', res.idToken)
+        vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
       })
       .catch(e => console.log(e))
+  },
+  setLogoutTimer(vuexContext, duration) {
+    setTimeout(() => {
+      vuexContext.commit('clearToken')
+    }, duration)
   }
 }

@@ -10,6 +10,7 @@
 <script>
 export default {
   layout: 'admin',
+  middleware: ['auth', 'log'],
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts
