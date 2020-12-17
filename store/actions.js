@@ -33,5 +33,24 @@ export default {
         vuexContext.commit('editPost', editedPost)
       })
       .catch(e => console.log(e))
+  },
+  authenticateUser(vuexContext, authData) {
+    let authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
+    if(!authData.isLogin) authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
+
+    return this.$axios
+      .$post(
+        authUrl + process.env.fbApiKey, 
+        {
+          email: authData.email,
+          password: authData.password,
+          returnSecureToken: true
+        }
+      )
+      .then(res => {
+        console.log(res)
+        vuexContext.commit('setToken', res.idToken)
+      })
+      .catch(e => console.log(e))
   }
 }

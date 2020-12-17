@@ -10,5 +10,8 @@ export default {
       post => post.id === editedPost.id
     );
     state.loadedPosts[postIndex] = editedPost
+  },
+  setToken(state, token) {
+    state.token = token
   }
 }

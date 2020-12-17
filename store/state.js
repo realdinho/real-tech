@@ -1,3 +1,4 @@
 export default () => ({
-  loadedPosts: []
+  loadedPosts: [],
+  token: null
 })
