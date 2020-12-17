@@ -46,7 +46,12 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
+  axios: {
+    baseUrl: process.env.BASE_URL || 'https://real-tech-d036d-default-rtdb.firebaseio.com',
+    credentials: false
+  },
   /*
   ** Build configuration
   */
