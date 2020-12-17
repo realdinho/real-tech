@@ -3,7 +3,7 @@
     section(class="post")
       h1(class="post-title") {{ loadedPost.title }}
       div(class="post-details")
-        div(class="post-detail") Last updated on {{ loadedPost.updatedDate }}
+        div(class="post-detail") Last updated on {{ loadedPost.updatedDate | date }}
         div(class="post-detail") Written by {{ loadedPost.author }}
       p(class="post-content") {{ loadedPost.content }}
     section(class="post-feedback")
