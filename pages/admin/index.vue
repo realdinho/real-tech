@@ -10,7 +10,7 @@
 <script>
 export default {
   layout: 'admin',
-  middleware: ['auth', 'log'],
+  middleware: ['auth', 'check-auth'],
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts
