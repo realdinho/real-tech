@@ -1,6 +1,7 @@
+const bodyParser = require('body-parser')
 
 export default {
-  mode: 'universal',
+  // mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -65,5 +66,12 @@ export default {
   env: {
     baseUrl: process.env.BASE_URL || 'https://real-tech-d036d-default-rtdb.firebaseio.com',
     fbApiKey: 'AIzaSyChFE1gzUgbIE74gInPd_QnqQjRHbK4A5o'
-  }
+  },
+  // router: {
+  //   middleware: 'log'
+  // },
+  serverMiddleware: [
+    bodyParser.json(),
+    '~/api'
+  ]
 }
