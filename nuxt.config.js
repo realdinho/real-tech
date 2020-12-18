@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser')
 
 export default {
-  // mode: 'universal',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -21,10 +21,10 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#0eff45', height: '4px', duration: 5000 },
+  loading: { color: 'red', height: '4px', duration: 5000 },
   loadingIndicator: {
     name: 'circle',
-    color: '#0eff45'
+    color: 'red'
   },
   /*
   ** Global CSS

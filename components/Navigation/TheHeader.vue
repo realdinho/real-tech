@@ -9,10 +9,14 @@
         ul(class="nav-list")
           li(class="nav-item")
             nuxt-link(to="/posts") Blog
-          li(class="nav-item")
+          li(class="nav-item" v-if="!isAdmin")
             nuxt-link(to="/about") About
-          li(class="nav-item")
+          li(class="nav-item" v-if="!isAdmin")
             nuxt-link(to="/admin") Admin
+          li(class="nav-item" v-if="isAdmin")
+            nuxt-link(to="/admin/new-post") New Post
+          li(class="nav-item" v-if="isAdmin")
+            a(@click="onLogout") Logout
 </template>
 
 <script>
@@ -22,6 +26,17 @@ export default {
   name: "TheHeader",
   components: {
     TheSideNavToggle
+  },
+  computed: {
+    isAdmin() {
+      return this.$store.getters.isAuthenticated
+    }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch('logout')
+      this.$router.push('/admin/auth')
+    }
   }
 };
 </script>

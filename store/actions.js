@@ -22,7 +22,7 @@ export default {
       updatedDate: new Date() 
     }
     return this.$axios
-      .$post(`${process.env.baseUrl}/posts.json`, createdPost)
+      .$post(`${process.env.baseUrl}/posts.json?auth=${vuexContext.state.token}`, createdPost)
       .then(data => {
         vuexContext.commit('addPost', { ...createdPost, id: data.name })
       })

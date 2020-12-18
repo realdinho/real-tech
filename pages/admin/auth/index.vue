@@ -2,14 +2,10 @@
   div(class="admin-auth-page")
     div(class="auth-container")
       form(@submit.prevent="onSubmit")
-        AppControlInput(type="email" v-model="email") E-Mail Address
-        AppControlInput(type="password" v-model="password") Password
+        AppControlInput(type="email" v-model="email") Email:
+        AppControlInput(type="password" v-model="password") Password:
         AppButton(type="submit") {{ isLogin ? 'Login' : 'Sign Up' }}
-        AppButton(
-          type="button"
-          btn-style="inverted"
-          style="margin-left: 10px"
-          @click="isLogin = !isLogin") Switch to {{ isLogin ? 'Signup' : 'Login' }}
+        a(class="switch-btn" @click="isLogin = !isLogin") Switch to {{ isLogin ? 'Signup' : 'Login' }}
 </template>
 
 <script>
@@ -18,7 +14,7 @@ import AppButton from '@/components/UI/AppButton'
 
 export default {
   name: 'AdminAuthPage',
-  layout: 'admin',
+  // layout: 'admin',
   components: {
     AppControlInput,
     AppButton
@@ -32,7 +28,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.email, this.password);
       this.$store
         .dispatch('authenticateUser', {
           isLogin: this.isLogin,
@@ -65,5 +60,11 @@ export default {
   margin: auto;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.switch-btn {
+  margin-left: 15px;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

@@ -29,6 +29,7 @@ export default {
   padding: 5px;
   cursor: pointer;
   border: 1px solid black;
+  width: 100px;
 }
 
 .button:hover,
